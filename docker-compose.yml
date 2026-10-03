@@ -1,0 +1,16 @@
+services:
+  lca-service:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-sqlite:///./data/lca_store.db}
+      EXTERNAL_DATA_API_URL: ${EXTERNAL_DATA_API_URL:-}
+      EXTERNAL_DATA_API_KEY: ${EXTERNAL_DATA_API_KEY:-}
+      RETRAIN_THRESHOLD_NEW_RECORDS: ${RETRAIN_THRESHOLD_NEW_RECORDS:-50}
+      RETRAIN_CRON_SCHEDULE: ${RETRAIN_CRON_SCHEDULE:-0 2 * * *}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-}
+    volumes:
+      - ./data:/app/data
+      - ./artifacts:/app/artifacts
+    restart: unless-stopped

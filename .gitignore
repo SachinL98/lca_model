@@ -1,0 +1,11 @@
+*.joblib
+__pycache__/
+*.py[cod]
+.env
+*.db
+*.db-journal
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+artifacts/metadata.json
