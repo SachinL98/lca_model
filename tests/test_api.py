@@ -152,3 +152,19 @@ def test_restart_reuses_persisted_model(settings):
         c.post("/retrain")
     with TestClient(create_app(settings)) as c:
         assert c.get("/health").json()["model_version"] == "v2"  # loaded, not retrained
+
+
+def test_cors_allows_configured_origin(settings):
+    cfg = settings.model_copy(update={"CORS_ALLOW_ORIGINS": "http://localhost:8080"})
+    with TestClient(create_app(cfg)) as c:
+        r = c.options(
+            "/predict",
+            headers={
+                "Origin": "http://localhost:8080",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "content-type",
+            },
+        )
+        assert r.headers["access-control-allow-origin"] == "http://localhost:8080"
+        other = c.get("/health", headers={"Origin": "http://evil.example"})
+        assert "access-control-allow-origin" not in other.headers

@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     MAX_R2_REGRESSION: float = 0.05  # candidate may not trail the active model by more than this
 
     # --- API ---
+    CORS_ALLOW_ORIGINS: str = ""  # comma-separated browser origins, e.g. http://localhost:8080
     ADMIN_API_KEY: str | None = None  # when set, mutating endpoints require X-API-Key
 
     @property
