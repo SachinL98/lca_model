@@ -47,6 +47,7 @@ Environment variables (or a `.env` file):
 | `ARTIFACTS_DIR` | `artifacts` | Model files, `current_model.joblib`, `metadata.json` |
 | `MIN_TRAIN_SAMPLES` / `MIN_AVG_R2` / `MAX_R2_REGRESSION` | `50` / `0.0` / `0.05` | Training guards (below) |
 | `ADMIN_API_KEY` | _unset_ | If set, `POST /records`, `/retrain`, `/sync/external`, `/model/rollback` require an `X-API-Key` header |
+| `CORS_ALLOW_ORIGINS` | _empty_ | Comma-separated browser origins allowed to call the API (only needed when a web frontend calls it directly), e.g. `http://localhost:8080` |
 | `ENABLE_SCHEDULER` | `true` | Disable background jobs (e.g. in tests) |
 
 ## Pointing at an external database / API
